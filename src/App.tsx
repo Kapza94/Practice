@@ -22,18 +22,15 @@
 // export default App;
 
 import React, { useState } from "react";
-import Cart from "./Components/Cart";
-import NavBar from "./Components/NavBar";
+import ExpandableText from "./Components/ExpandableText";
 
 const App = () => {
-  const [cartItems, setCartItems] = useState(["Product1", "Product2"]);
-
   const handleClick = () => {};
 
   return (
     <div>
-      <NavBar cartItemsCount={cartItems.length} />
-      <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
+      <ExpandableText maxChars={10}>Hello World</ExpandableText>
+      <button onClick={handleClick}>Change</button>
     </div>
   );
 };
