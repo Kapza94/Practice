@@ -21,14 +21,24 @@
 
 // export default App;
 
-import React from "react";
+import React, { useState } from "react";
 import Message from "./Message";
 
 const App = () => {
+  const [tags, setTags] = useState(["happy", "cheerful"]);
+
+  const handleClick = () => {
+    //add
+    setTags([...tags, "excited"]);
+    //remove
+    setTags(tags.filter((tag) => tag != "happy"));
+    //update
+    setTags(tags.map((tag) => (tag === "happy" ? "happiness" : tag)));
+  };
+
   return (
     <div>
-      <Message />
-
+      <button onClick={handleClick}>Click Me</button>
     </div>
   );
 };
