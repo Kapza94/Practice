@@ -22,15 +22,14 @@
 // export default App;
 
 import React, { useState } from "react";
-import ExpandableText from "./Components/ExpandableText";
+import Form from "./Components/Form.tsx/Form";
 
 const App = () => {
   const handleClick = () => {};
 
   return (
     <div>
-      <ExpandableText maxChars={10}>Hello World</ExpandableText>
-      <button onClick={handleClick}>Change</button>
+      <Form></Form>
     </div>
   );
 };
