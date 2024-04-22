@@ -1,24 +1,19 @@
 import React, { FormEvent, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
+interface FormData {
+  name: string;
+  age: number;
+}
+
 const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  console.log(formState.errors);
-
-  // const [person, setPerson] = useState({
-  //   name: "",
-  //   age: "",
-  // });
-
-  // const handlesubmit = (event: FormEvent) => {
-  //   event.preventDefault();
-  //   console.log(person);
-  // };
+  console.log(errors);
 
   const onSubmit = (data: FieldValues) => console.log("data");
 
@@ -29,15 +24,17 @@ const Form = () => {
           Name
         </label>
         <input
-          // onChange={(e) => setPerson({ ...person, name: e.target.value })}
           {...register("name", { required: true, minLength: 3 })}
-          // value={person.name} //Now this input field ALWAYS relies on the value from our state variable.Now we are reffering to this field as a controlled component.As its entirely controlled by react.
           id="name"
           type="text"
           className="form-control"
         />
-        {errors.name?.type === "required" && <p>The name field is required </p>}{" "}
-        {errors.name?.type === "minLength" && <p>The minimum length name is 3</p>}
+        {errors.name?.type === "required" && (
+          <p className="text-danger">The name field is required </p>
+        )}{" "}
+        {errors.name?.type === "minLength" && (
+          <p className="text-danger">The minimum length name is 3</p>
+        )}
       </div>
 
       <div className="mb-3">
