@@ -1,35 +1,27 @@
-// import ListGroup from "./Components/ListGroup";
-// import Button from "./Components/Button/Button";
-// import "./App.css";
-// import Like from "./Components/Like";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
-// function App() {
-//   let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
-
-//   const handleSelectItem = (item: string) => {
-//     console.log(item);
-//   };
-
-//   return (
-//     <div>
-//       <ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem} />
-//       <Button>CLICK ME</Button>
-//       <Like onClick={() => console.log("Clicked")} />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import React, { useState } from "react";
-import Form from "./Components/Form.tsx/Form";
+interface User {
+  id: number;
+  name: string;
+}
 
 const App = () => {
-  const handleClick = () => {};
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <div>
-      <Form></Form>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
